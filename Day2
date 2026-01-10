@@ -1,0 +1,45 @@
+# 🚀 Databricks 14 Days AI Challenge
+### #DatabricksWithIDC
+
+---
+
+## 📅 DAY 2 (10/01/26) – Apache Spark Fundamentals
+
+Completed **Day 2** of the Databricks 14 Days AI Challenge, focusing on the **core fundamentals of Apache Spark** and hands-on DataFrame operations.
+
+---
+
+### 📘 What I Learned
+- Spark architecture: **Driver, Executors, DAG**
+- Difference between **DataFrames and RDDs**
+- Concept of **Lazy Evaluation**
+- Databricks notebook magic commands:
+  - `%sql`
+  - `%python`
+  - `%fs`
+
+---
+
+### 🛠️ Tasks Completed
+- Uploaded a sample e-commerce CSV file
+- Read data into a Spark DataFrame
+- Performed basic DataFrame operations:
+  - `select`
+  - `filter`
+  - `groupBy`
+  - `orderBy`
+- Exported processed results
+
+---
+
+### 📝 Practice (PySpark)
+
+```python
+# Load data
+events = spark.read.csv("/path/to/sample.csv", header=True, inferSchema=True)
+
+# Basic operations
+events.select("event_type", "product_name", "price").show(10)
+events.filter("price > 100").count()
+events.groupBy("event_type").count().show()
+top_brands = events.groupBy("brand").count().orderBy("count", ascending=False).limit(5)
