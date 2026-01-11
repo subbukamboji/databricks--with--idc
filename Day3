@@ -52,3 +52,15 @@ events.groupBy("category_code", "event_type").count() \
         "conversion_rate",
         (F.col("purchase") / F.col("view")) * 100
     )
+🙏 Acknowledgements
+Grateful for the initiative and learning support by:
+
+Databricks
+Codebasics
+Indian Data Club
+#DatabricksWithIDC
+
+🙏 Credits:
+Databricks | Codebasics | Indian Data Club
+
+#DatabricksWithIDC #LearningInPublic #DataEngineering
