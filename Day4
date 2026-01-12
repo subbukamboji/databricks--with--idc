@@ -1,0 +1,71 @@
+# 🚀 Databricks 14 Days AI Challenge ### #DatabricksWithIDC --- ## 
+
+
+Successfully completed Day 4 of the Databricks 14 Days AI Challenge 🎯
+Today’s focus was on Delta Lake fundamentals and understanding how it brings reliability, consistency, and ACID guarantees to data lakes in Databricks.
+📅 DAY 4 (12/01/26) – Delta Lake Introduction Completed 
+**Day 4** of the Databricks 14 Days AI Challenge, focusing on **Delta Lake fundamentals** and understanding how it brings reliability and ACID guarantees to data lakes. --- ### 
+📘 What I Learned - What **Delta Lake** is and why it is used - **ACID transactions** in data lakes - **Schema enforcement** and schema validation
+- Key differences between **Delta vs Parquet** --- ### 
+🛠️ Tasks Completed - Converted CSV data into **Delta format** - Created **Delta tables** using: - PySpark - SQL - Tested **schema enforcement** - Handled duplicate and invalid inserts --- ###
+📝 Practice (PySpark & SQL)
+python
+# Convert to Delta
+events.write.format("delta").mode("overwrite").save("/delta/events")
+
+# Create managed table
+events.write.format("delta").saveAsTable("events_table")
+
+# SQL approach
+spark.sql("""
+    CREATE TABLE events_delta
+    USING DELTA
+    AS SELECT * FROM events_table
+""")
+
+# Test schema enforcement
+try:
+    wrong_schema = spark.createDataFrame([("a","b","c")], ["x","y","z"])
+    wrong_schema.write.format("delta").mode("append").save("/delta/events")
+except Exception as e:
+    print(f"Schema enforcement: {e}")
+
+
+🧪 Practice Code (PySpark & SQL)
+🔹 Convert CSV / DataFrame to Delta
+events.write.format("delta") \
+    .mode("overwrite") \
+    .save("/delta/events")
+
+🔹 Create Managed Delta Table (PySpark)
+events.write.format("delta") \
+    .saveAsTable("events_table")
+
+🔹 Create Delta Table using SQL
+CREATE TABLE events_delta
+USING DELTA
+AS
+SELECT * FROM events_table;
+
+🔹 Test Schema Enforcement
+try:
+    wrong_schema = spark.createDataFrame(
+        [("a", "b", "c")],
+        ["x", "y", "z"]
+    )
+    wrong_schema.write.format("delta") \
+        .mode("append") \
+        .save("/delta/events")
+except Exception as e:
+    print(f"Schema enforcement triggered: {e}")
+
+
+✅ Key Takeaways
+
+Delta Lake adds ACID guarantees to data lakes
+
+Prevents bad or inconsistent data using schema enforcement
+
+Supports both SQL and PySpark
+
+Makes data lakes production-ready
