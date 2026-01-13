@@ -1,0 +1,55 @@
+# 🚀 Databricks 14 Days AI Challenge
+### #DatabricksWithIDC
+
+---
+
+## 📅 DAY 5 – Delta Lake Advanced Operations
+
+Completed **Day 5** of the Databricks 14 Days AI Challenge, focusing on **advanced Delta Lake features** for managing incremental data, performance optimization, and storage maintenance.
+---
+### 📘 What I Learned
+- How to implement **incremental data ingestion using MERGE**
+- Querying **historical versions** of Delta tables (Time Travel)
+- Optimizing Delta tables for better performance
+- Cleaning up old and unused files safely
+
+---
+
+### 🛠️ Tasks Completed
+- Implemented **incremental MERGE** operations
+- Queried **historical table versions**
+- Optimized Delta tables using `OPTIMIZE`
+- Cleaned old files using `VACUUM`
+
+---
+
+### 📝 Practice (Delta Lake)
+
+```python
+# Incremental MERGE
+spark.sql("""
+MERGE INTO events_delta t
+USING updates u
+ON t.event_id = u.event_id
+WHEN MATCHED THEN
+  UPDATE SET *
+WHEN NOT MATCHED THEN
+  INSERT *
+""")
+
+# Query historical versions (Time Travel)
+spark.sql("SELECT * FROM events_delta VERSION AS OF 1").show()
+
+# Optimize Delta table
+spark.sql("OPTIMIZE events_delta")
+
+# Clean old files
+spark.sql("VACUUM events_delta RETAIN 168 HOURS")
+
+🔗 Resources Used
+
+Delta Lake MERGE Documentation
+Delta Lake Time Travel
+Spark Structured Streaming Documentation
+Databricks Streaming with Delta Lake
+Delta Lake Optimization & Vacuum
