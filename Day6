@@ -1,0 +1,12 @@
+### 📘 What I Learned
+- **Medallion Architecture**: Bronze (raw) → Silver (cleaned) → Gold (aggregated)
+- Best practices for data quality, scalability, and performance at each layer
+- **Incremental processing patterns** for efficient data pipelines
+
+---
+
+### 🛠️ Tasks Completed
+- Designed a **3-layer Medallion architecture**
+- Built **Bronze layer** for raw data ingestion
+- Built **Silver layer** with data cleaning, validation, and deduplication
+- Built **Gold layer** with business-level aggregations and metrics
