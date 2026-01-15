@@ -1,0 +1,42 @@
+### 📘 What I Learned
+- Differences between **Databricks Jobs and notebooks**
+- Designing **multi-task workflows** for data pipelines
+- Using **parameters and scheduling** for automated execution
+- Implementing **basic error handling** in workflows
+
+---
+
+### 🛠️ Tasks Completed
+- Added **parameter widgets** to notebooks
+- Created a **multi-task Databricks job** (Bronze → Silver → Gold)
+- Configured **task dependencies** between pipeline stages
+- Scheduled automated job execution
+
+---
+
+### 📝 Practice (Databricks Jobs & Parameters)
+
+```python
+# Add widgets for parameterization
+dbutils.widgets.text("source_path", "/default/path")
+dbutils.widgets.dropdown("layer", "bronze", ["bronze", "silver", "gold"])
+
+# Read widget values
+source_path = dbutils.widgets.get("source_path")
+layer = dbutils.widgets.get("layer")
+
+print(f"Running pipeline for layer: {layer}")
+print(f"Source path: {source_path}")
+
+def run_pipeline(layer_name):
+    if layer_name == "bronze":
+        print("Executing Bronze layer logic")
+        # Bronze ingestion logic
+    elif layer_name == "silver":
+        print("Executing Silver layer logic")
+        # Silver transformation logic
+    elif layer_name == "gold":
+        print("Executing Gold layer logic")
+        # Gold aggregation logic
+
+run_pipeline(layer)
