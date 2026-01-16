@@ -1,0 +1,61 @@
+Md
+### 📘 What I Learned
+- **Unity Catalog hierarchy**: Catalog → Schema → Table
+- Managing **access control** using GRANT and REVOKE
+- Understanding **data lineage** for governance and auditing
+- Difference between **managed vs external tables**
+
+---
+
+### 🛠️ Tasks Completed
+- Created **catalogs and schemas**
+- Registered existing **Delta tables**
+- Set up **permissions and access control**
+- Created **views** for controlled data access
+
+---
+
+### 📝 Practice (Unity Catalog & Governance)
+
+```sql
+-- Create catalog and schemas
+CREATE CATALOG IF NOT EXISTS ecommerce;
+USE CATALOG ecommerce;
+
+CREATE SCHEMA IF NOT EXISTS bronze;
+CREATE SCHEMA IF NOT EXISTS silver;
+CREATE SCHEMA IF NOT EXISTS gold;
+
+-- Register Delta tables
+CREATE TABLE bronze.events
+USING DELTA
+LOCATION '/delta/bronze/events';
+
+CREATE TABLE silver.events
+USING DELTA
+LOCATION '/delta/silver/events';
+
+CREATE TABLE gold.products
+USING DELTA
+LOCATION '/delta/gold/products';
+
+-- Permissions
+GRANT SELECT ON TABLE gold.products TO `analysts@company.com`;
+GRANT ALL PRIVILEGES ON SCHEMA silver TO `engineers@company.com`;
+
+-- Controlled view
+CREATE VIEW gold.top_products AS
+SELECT product_name, revenue, conversion_rate
+FROM gold.products
+WHERE purchases > 10
+ORDER BY revenue DESC;
+🔗 Resources Used
+Unity Catalog – Getting Started Guide
+🙏 Acknowledgements & Tagging
+Sharing my learning in public as part of #DatabricksWithIDC.
+Tagging:
+Databricks
+Codebasics
+Indian Data Club
+#DatabricksWithIDC
+#indiandataclub
