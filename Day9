@@ -1,0 +1,65 @@
+### 📘 What I Learned
+- Working with **Databricks SQL Warehouses**
+- Writing **complex analytical SQL queries**
+- Creating **interactive dashboards**
+- Using **visualizations, filters, and scheduled refreshes**
+
+---
+
+### 🛠️ Tasks Completed
+- Created a **SQL Warehouse**
+- Wrote analytical queries for business insights
+- Built dashboards for:
+  - Revenue trends
+  - Conversion funnels
+  - Top-performing products
+- Added **filters** and scheduled dashboard refresh
+
+---
+
+### 📝 Practice (SQL Analytics)
+
+```sql
+-- Revenue with 7-day moving average
+WITH daily AS (
+  SELECT event_date, SUM(revenue) AS rev
+  FROM gold.products
+  GROUP BY event_date
+)
+SELECT
+  event_date,
+  rev,
+  AVG(rev) OVER (
+    ORDER BY event_date
+    ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
+  ) AS ma7
+FROM daily;
+
+-- Conversion funnel
+SELECT
+  category_code,
+  SUM(views) AS views,
+  SUM(purchases) AS purchases,
+  ROUND(SUM(purchases) * 100.0 / SUM(views), 2) AS conversion_rate
+FROM gold.products
+GROUP BY category_code;
+
+-- Customer tiers
+SELECT
+  CASE
+    WHEN cnt >= 10 THEN 'VIP'
+    WHEN cnt >= 5 THEN 'Loyal'
+    ELSE 'Regular'
+  END AS tier,
+  COUNT(*) AS customers,
+  AVG(total_spent) AS avg_ltv
+FROM (
+  SELECT
+    user_id,
+    COUNT(*) AS cnt,
+    SUM(price) AS total_spent
+  FROM silver.events
+  WHERE event_type = 'purchase'
+  GROUP BY user_id
+)
+GROUP BY tier;
