@@ -1,0 +1,65 @@
+### 📘 What I Learned
+- Understanding **query execution plans** for performance analysis
+- **Partitioning strategies** for large Delta tables
+- Using **OPTIMIZE and ZORDER** to improve query performance
+- Applying **caching techniques** for iterative workloads
+
+---
+
+### 🛠️ Tasks Completed
+- Analyzed query execution plans
+- Partitioned large Delta tables
+- Applied **ZORDER** for data skipping
+- Benchmarked performance improvements before and after optimization
+
+---
+
+### 📝 Practice (Performance Optimization)
+
+```python
+# Explain query
+spark.sql(
+    "SELECT * FROM silver.events WHERE event_type = 'purchase'"
+).explain(True)
+
+# Create partitioned table
+spark.sql("""
+  CREATE TABLE silver.events_part
+  USING DELTA
+  PARTITIONED BY (event_date, event_type)
+  AS SELECT * FROM silver.events
+""")
+
+# Optimize with ZORDER
+spark.sql(
+    "OPTIMIZE silver.events_part ZORDER BY (user_id, product_id)"
+)
+
+# Benchmark performance
+import time
+start = time.time()
+spark.sql(
+    "SELECT * FROM silver.events WHERE user_id = 12345"
+).count()
+print(f"Query time: {time.time() - start:.2f}s")
+
+# Cache table for iterative queries
+cached = spark.table("silver.events").cache()
+cached.count()  # Materialize cache
+🔗 Resources Used
+Databricks Performance Tuning Guide
+
+Delta Lake Optimization Guide
+
+🙏 Acknowledgements & Tagging
+Sharing my learning in public as part of #DatabricksWithIDC.
+
+Tagging:
+
+Databricks
+
+Codebasics
+
+Indian Data Club
+
+#DatabricksWithIDC
