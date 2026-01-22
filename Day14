@@ -1,0 +1,62 @@
+### 📘 What I Learned
+- Using **Databricks Genie** to convert natural language into SQL queries
+- Exploring **Mosaic AI** capabilities within Databricks
+- Basics of **Generative AI integration**
+- Performing **AI-assisted data analysis**
+
+---
+
+### 🛠️ Tasks Completed
+- Queried data using **natural language with Genie**
+- Explored **Mosaic AI** features and workflows
+- Built a **simple NLP task**
+- Generated **AI-powered insights** from data
+
+---
+
+### 📝 Practice (Genie & Mosaic AI)
+
+**Genie Queries**
+- "Show me total revenue by category"
+- "Which products have the highest conversion rate?"
+- "What's the trend of daily purchases over time?"
+- "Find customers who viewed but never purchased"
+
+**Mosaic AI – NLP Example**
+
+```python
+# Simple sentiment analysis
+from transformers import pipeline
+import mlflow
+
+classifier = pipeline("sentiment-analysis")
+
+reviews = [
+    "This product is amazing!",
+    "Terrible quality, waste of money"
+]
+
+results = classifier(reviews)
+print(results)
+
+# Log experiment to MLflow
+with mlflow.start_run(run_name="sentiment_model"):
+    mlflow.log_param("model", "distilbert-sentiment")
+    mlflow.log_metric("accuracy", 0.95)  # Example metric
+🔗 Resources Used
+Databricks Genie – Overview Video
+
+Mosaic AI Documentation
+
+🙏 Acknowledgements & Tagging
+Sharing my learning in public as part of #DatabricksWithIDC.
+
+Tagging:
+
+Databricks
+
+Codebasics
+
+Indian Data Club
+
+#DatabricksWithIDC
